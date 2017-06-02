@@ -1,0 +1,31 @@
+{% extends "Base.html" %}
+{% block title %}
+    Weather
+{% endblock %}
+{% block body %}
+    <h1>Weather</h1>
+    <div class="flexboxParent">
+        <div class="hexagon">
+            <p>Temperatuur</p>
+            <p id="pTemperatuur">placeholder</p>
+        </div>
+        <div class="hexagon">
+            <p>Datum/tijd</p>
+            <p id="pTijd">{{ currentTime }}</p>
+        </div>
+        <div class="hexagon">
+            <p>Windsnelheid</p>
+            <p id="pWindsnelheid">placeholder</p>
+        </div>
+        <div class="hexagon">
+            <p>Luchtvochtigheid</p>
+            <p id="pLuchtvochtigheid">placeholder</p>
+        </div>
+        <div class="hexagon">
+            <p>Neerslag</p>
+            <p id="pNeerslag">placeholder</p>
+
+        </div>
+    </div>
+    <script src="../static/javascript/updateHTML.js"></script>
+{% endblock %}

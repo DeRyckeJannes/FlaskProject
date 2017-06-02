@@ -1,0 +1,132 @@
+body {
+    font-family: Roboto, sans-serif;
+    background: #76b852;
+}
+
+h1 {
+    color: white;
+    text-transform: uppercase;
+    font-size: 35px;
+    text-align: center;
+}
+
+nav {
+    background: white;
+    border-radius: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+
+}
+nav a {
+    text-decoration: none;
+    text-align: center;
+    color: #4CAF50;
+    display: block;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    background-color: #236E72;
+    color: white;
+}
+
+#LogScreen {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+form {
+    position: relative;
+    background: #FFFFFF;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 15px;
+    border: 0;
+    font-size: 14px;
+}
+
+form input[type=submit] {
+    text-transform: uppercase;
+    outline: 0;
+    background-color: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+form input[type=submit]:hover {
+    background-color: #236E72;
+}
+
+form p{
+
+}
+#wronglogin{
+    color:darkred;
+}
+
+.flexboxParent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 600px;
+    height: 500px;
+    margin: 50px auto;
+}
+
+/*hexagons from http://csshexagon.com/*/
+.hexagon {
+    position: relative;
+    width: 150px;
+    height: 87px;
+    background-color: #FFFFFF;
+    margin: 43px 0;
+    margin-right: 50px;
+}
+
+.hexagon p {
+    color: #236E72;;
+    font-size: 18px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hexagon:before, .hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+}
+
+.hexagon:before {
+    bottom: 100%;
+    border-bottom: 43px solid #FFFFFF;
+}
+
+.hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 43px solid #FFFFFF;
+    left: 0;
+}

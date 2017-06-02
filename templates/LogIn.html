@@ -1,0 +1,15 @@
+{% extends "Base.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block body %}
+    <div id="LogScreen">
+        <form action="" method="post">
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <input type="submit" value="SIGN IN" name="submit">
+            <p>No account? Register</p>
+            <p id="wronglogin">{{ error }}</p>
+        </form>
+    </div>
+{% endblock %}
