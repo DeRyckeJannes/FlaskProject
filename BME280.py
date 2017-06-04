@@ -6,7 +6,7 @@ address = 0x77
 
 temperatureCompensationParameters = bus.read_i2c_block_data(address, 0x88, 6)
 # compensatie parameters maar 1 keer inlezen data van sensor blijven inlezen
-# unsigned integer value stored in two’s complement.
+# unsigned integer value stored in two complement
 # print(temperatureCompensationParameters)
 # temperature
 dig_T1 = temperatureCompensationParameters[1] << 8 | temperatureCompensationParameters[0]  # 0x88 & 0x09
@@ -28,12 +28,12 @@ temperatureValue = ((temperatureMSB << 16) | (temperatureLSB << 8) | (temperatur
 # bereken temperatuur
 var1 = (((temperatureValue >> 3) - (dig_T1 << 1)) * (dig_T2) >> 11)
 var2 = ((((temperatureValue >> 4) - (dig_T1) * ((temperatureValue >> 4) - (dig_T1) >> 12))) * (dig_T3) >> 14)
-print(var1)
-print(var2)
+# print(var1)
+# print(var2)
 t_fine = (var1 | var2)
 T = (t_fine * 5 + 128) >> 8
-T = T / 100
 print(T)
+T = T / 100
 
 
 # ----------------------------------------------------------------------------------------------------------------------#

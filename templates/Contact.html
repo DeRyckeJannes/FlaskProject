@@ -1,1 +1,16 @@
 {% extends "Base.html" %}
+{% block title %}
+    Contact
+{% endblock %}
+{% block body %}
+    <h1>Contact</h1>
+    <div class="Forms">
+        <form action="" method="post" id="ContactForm">
+            <input type="text" placeholder="SUBJECT" name="Subject">
+            <textarea name="Message" form="ContactForm" placeholder="MESSAGE"></textarea>
+            <input type="submit" value="SEND" name="submit">
+            <p class="WrongInput">{{ error }}</p>
+            <p class="SuccesFulInput">{{ succesful }}</p>
+        </form>
+    </div>
+{% endblock %}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,9 @@
         {% block title %}
         {% endblock %} </title>
 </head>
-<body>
+{#<body{% block background %} {% end block %}>#}
+<body {% block bodyID %} {% endblock %}>
+{% block nav %}
 <nav>
         <ul>
             <li><a href="{{ url_for('Home') }}">Home</a></li>
@@ -16,6 +19,7 @@
             <li><a href="{{ url_for('Contact') }}">Contact</a></li>
         </ul>
 </nav>
+{% endblock %}
 {% block body %}
 
 {% endblock %}

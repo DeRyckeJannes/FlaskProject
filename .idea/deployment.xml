@@ -16,6 +16,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Copy of project-level server 'PI' (2)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Project1" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Copy of project-level server 'sftp://pi@weerstation:22/usr/bin/python3'">
         <serverdata>
           <mappings>

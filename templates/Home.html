@@ -1,6 +1,42 @@
 {% extends "Base.html" %}
 {% block title %}
-      Home
+    Home
 {% endblock %}
+{% block bodyID %} id="HomeBody" {% endblock %}
 {% block body %}
+    {% block nav %}
+    {% endblock %}
+    <h1 id="Home">WeatherStation</h1>
+    <div class="flexboxHome">
+        <a href="{{ url_for("TheWeather") }}">
+            <div class="hexagon hexagonHome">
+                <div class="hexagon-in1">
+                    <div class="hexagon-in2">
+                    </div>
+                </div>
+                <p class="pHome">Weather</p>
+            </div>
+        </a>
+        <a href="{{ url_for("History") }}">
+            <div class="hexagon hexagonHome">
+                <div class="hexagon-in1">
+                    <div class="hexagon-in2">
+                    </div>
+                </div>
+                <p class="pHome">History</p>
+            </div>
+        </a>
+        <a href="{{ url_for("Contact") }}">
+            <div class="hexagon hexagonHome">
+                <div class="hexagon-in1">
+                    <div class="hexagon-in2">
+                    </div>
+                </div>
+                <p class="pHome">Contact</p>
+            </div>
+        </a>
+
+    </div>
+
 {% endblock %}
+
