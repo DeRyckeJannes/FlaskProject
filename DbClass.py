@@ -12,7 +12,7 @@ class DbClass:
 
     def getDataFromDatabase(self):
         # Query zonder parameters
-        sqlQuery = "SELECT * FROM tblMeting"
+        sqlQuery = "SELECT Temperatuur,Windsnelheid,Luchtvochtigheid,RainDrop FROM tblMetingen ORDER BY ID DESC LIMIT 1"
         self.__cursor.execute(sqlQuery)
         result = self.__cursor.fetchall()
         self.__cursor.close()
@@ -35,7 +35,7 @@ class DbClass:
         return result
 
     def getUsersFromDatabase(self):
-        sqlQuery = "SELECT Email,Password FROM tblUsers"
+        sqlQuery = "SELECT ID,Email,Password FROM tblUsers"
         self.__cursor.execute(sqlQuery)
         result = self.__cursor.fetchall()
         self.__cursor.close()
@@ -56,6 +56,14 @@ class DbClass:
         sqlQuery = "INSERT INTO tblContact (subject,message) VALUES ('{param1}','{param2}')"
         # Combineren van de query en parameter
         sqlCommand = sqlQuery.format(param1=value1, param2=value2)
+        self.__cursor.execute(sqlCommand)
+        self.__connection.commit()
+        self.__cursor.close()
+    def saveSensorValuesToDatabase(self,list):
+        # Query met parameters
+        sqlQuery = "INSERT INTO tblMetingen (WeerstationID,Temperatuur,Windsnelheid,Luchtvochtigheid, RainDrop) VALUES ('{param1}','{param2}','{param3}','{param4}','{param5}')"
+        # Combineren van de query en parameter
+        sqlCommand = sqlQuery.format(param1=1, param2=list[0],param3=list[1],param4=list[2],param5=list[3])
         self.__cursor.execute(sqlCommand)
         self.__connection.commit()
         self.__cursor.close()

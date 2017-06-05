@@ -12,7 +12,7 @@
                 </div>
             </div>
             <p class="pWeather">Temperatuur</p>
-            <p id="pTemperatuur">placeholder</p>
+            <p id="pTemperatuur">{{ SensorInfo[0] }}</p>
         </div>
 
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <p class="pWeather">Windsnelheid</p>
-            <p id="pWindsnelheid">placeholder</p>
+            <p id="pWindsnelheid">{{ SensorInfo[1] }}</p>
         </div>
 
         <div class="hexagon">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <p class="pWeather">Luchtvochtigheid</p>
-            <p id="pLuchtvochtigheid">placeholder</p>
+            <p id="pLuchtvochtigheid">{{ SensorInfo[2] }}</p>
         </div>
 
         <div class="hexagon">
@@ -52,31 +52,10 @@
                 </div>
             </div>
             <p class="pWeather">Neerslag</p>
-            <p id="pNeerslag">placeholder</p>
+            <p id="pNeerslag">{{ SensorInfo[3] }}</p>
         </div>
-
-        {#        <div class="hexagon">#}
-        {#            <p>Temperatuur</p>#}
-        {#            <p id="pTemperatuur">placeholder</p>#}
-        {#        </div>#}
-        {#        <div class="hexagon">#}
-        {#            <p>Datum/tijd</p>#}
-        {#            <p id="pTijd">{{ currentTime }}</p>#}
-        {#        </div>#}
-        {#        <div class="hexagon">#}
-        {#            <p>Windsnelheid</p>#}
-        {#            <p id="pWindsnelheid">placeholder</p>#}
-        {#        </div>#}
-        {#        <div class="hexagon">#}
-        {#            <p>Luchtvochtigheid</p>#}
-        {#            <p id="pLuchtvochtigheid">placeholder</p>#}
-        {#        </div>#}
-        {#        <div class="hexagon">#}
-        {#            <p>Neerslag</p>#}
-        {#            <p id="pNeerslag">placeholder</p>#}
-
-        {#    </div>#}
     </div>
+
     <figure>
         <img src="{{ url_for('static',filename="images/Picam.jpg") }}" alt="PyCamPicture" id="PyCamPicture">
     </figure>

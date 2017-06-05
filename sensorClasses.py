@@ -2,11 +2,11 @@ class sensors():
     def __init__(self):
         import smbus
         import spidev
-        import RPi.GPIO as GPIO
         self.__bus = smbus.SMBus(1)
         self.__address = 0x77
         self.__spi = spidev.SpiDev()  # create spi object
         self.__spi.open(0, 0)  # open spi port 0, device (CS) 0
+
     def ReadCompensationParametersTemp(self): #run once compensation parameters are always the same
         temperatureCompensationRegisters = self.__bus.read_i2c_block_data(self.__address, 0x88, 6)
         # compensatie parameters maar 1 keer inlezen data van sensor blijven inlezen
@@ -24,7 +24,6 @@ class sensors():
         temperatureCompensationParameters=[dig_T1,dig_T2,dig_T3]
         return temperatureCompensationParameters
 
-
     def CalculateTemperature(self, temperatureCompensationParameters):
         temperatureXLSB = self.__bus.read_byte_data(self.__address, 0xFC)
         temperatureLSB = self.__bus.read_byte_data(self.__address, 0xFB)
@@ -36,7 +35,6 @@ class sensors():
         T = (t_fine * 5 + 128) >> 8
         T = T / 100
         return t_fine, T
-
 
     def ReadCompensationParametersHumidity(self):
         dig_H1 = self.__bus.read_byte_data(self.__address, 0xA1)
@@ -70,12 +68,9 @@ class sensors():
             humidity = 100.0
         elif humidity < 0.0:
             humidity = 0.0
-        print("relative humidity: " + str(var_H))
         return humidity
 
     def __ReadChannel(self,channel):
-        # 3 bytes versturen
-        # 1, S D2 D1 D0 xxxx, 0
         adc = self.__spi.xfer2([1, (8 + channel) << 4, 0])
         data = ((adc[1] & 3 << 8) | adc[2])  # in byte 1 en 2 zit resultaat
         return data
@@ -87,9 +82,18 @@ class sensors():
             windspeed=0
         windspeed=(((windspeed/1.6)*32)*3.6)
         return windspeed
-    def ReadRaindDrop(self):
-        raindrop=self.__ReadChannel(5)
-        return raindrop
+
+    def ReadRaindDrop(self): # rain drop sensor can also be connected to 5v and MCP3008 for more values but we just want to know if it is raining or not.
+        import RPi.GPIO as GPIO
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(21,GPIO.IN)
+        if GPIO.input(21)==0:
+            return("It is Raining!")
+        if GPIO.input(21)==1:
+            return("It is not Raining!")
+
+
+
 
 # mijnBME=sensors()
 # humidityCompensationParameters=mijnBME.ReadCompensationParametersHumidity()
@@ -101,5 +105,3 @@ class sensors():
 # print humidity
 # raindrop=mijnBME.ReadRaindDrop()
 # print raindrop
-
-
