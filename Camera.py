@@ -15,8 +15,8 @@ class PiCam:
             if self.__currentTime == self.__photoMoments[i] and self.__photoTaken[i] == 0:
                 print("foto nemen")
                 self.__camera.capture("/home/pi/FlaskProject/static/images/Picam.jpg")
-
                 self.__photoTaken[i] = 1
+                self.__camera.close()
             if self.__currentTime == "22":  # after the last picture reset list, so that the next day we can take new pictures
                 for i in range(0, len(self.__photoTaken)):
                     self.__photoTaken[i] = 0

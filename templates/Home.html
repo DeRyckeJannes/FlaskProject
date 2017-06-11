@@ -1,9 +1,11 @@
 {% extends "Base.html" %}
+{% block nav_Home %} active {% endblock %}
 {% block title %}
     Home
 {% endblock %}
 {% block bodyID %} id="HomeBody" {% endblock %}
 {% block body %}
+    {% set active_page = "Home" %}
     {% block nav %}
     {% endblock %}
     <h1 id="Home">WeatherStation</h1>
@@ -35,8 +37,6 @@
                 <p class="pHome">Contact</p>
             </div>
         </a>
-
-    </div>
-
+        </div>
 {% endblock %}
 

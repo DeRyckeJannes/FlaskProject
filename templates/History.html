@@ -1,4 +1,114 @@
 {% extends "Base.html" %}
+{% block nav_History %}active{% endblock %}
+{% block header %}
+    <script src='../static/Chart.min.js'></script>
+{% endblock %}
 {% block body %}
+
     <h1>History</h1>
+    <div class="flexboxButtons">
+        <form action="" method="post" id="HistoryForm">
+            <input class="HistoryButtons" type="submit" name="submit" id=Button1 value="Day by Day">
+            <input class="HistoryButtons" type="submit" name="submit" id="Button2" value="Hour by Hour">
+        </form>
+    </div>
+    <div class="flexboxCharts">
+        <canvas id="TempChart" class="charts"></canvas>
+        <canvas id="HumChart" class="charts"></canvas>
+        <canvas id="WindChart" class="charts"></canvas>
+    </div>
+
+    <script>
+        var button = document.getElementById("Button1");
+        var button2= document.getElementById("Button2");
+        button.onclick = function () {
+            window.alert("Charts are being loaded please wait...");
+        };
+        button2.onclick=function(){
+            window.alert("Charts are being loaded please wait...");
+        };
+
+
+        var ctx = document.getElementById('TempChart').getContext('2d');
+        var TempChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% for item in labels %} "{{ item }}", {% endfor %}],
+                datasets: [{
+                    label: 'temperatuur',
+                    data: {{ Temp }},
+                    backgroundColor: "rgba(255,255,255,0.6)"
+                }],
+                options: {
+                    legend: {display: true},
+                    title: {
+                        display: true,
+                        text: 'Temperatuur'
+                    }
+                }
+            },
+            responsive: false,
+            maintainAspectRatio: false
+        });
+
+        var ctx2 = document.getElementById('HumChart').getContext('2d');
+        var HumChart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: {{ labels }},
+                datasets: [{
+                    label: 'Humidity',
+                    data: {{ Hum }},
+                    backgroundColor: "rgba(255,255,255,0.6)"
+                }],
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: 'Humidity'
+                    }
+                }
+            },
+            responsive: false,
+            maintainAspectRatio: false
+        });
+
+        var ctx3 = document.getElementById('WindChart').getContext('2d');
+        var WindChart = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: {{ labels }},
+                datasets: [{
+                    label: 'Windspeed',
+                    data: {{ WindSpeed }},
+                    backgroundColor: "rgba(255,255,255,0.6)"
+                }],
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: 'Windspeed'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }
+                }
+            },
+            responsive: false,
+            maintainAspectRatio: false
+        });
+    </script>
 {% endblock %}

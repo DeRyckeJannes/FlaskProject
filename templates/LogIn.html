@@ -3,13 +3,40 @@
     Home
 {% endblock %}
 {% block body %}
-        <form action="" method="post">
-            <input type="email" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
-            <input type="submit" value="SIGN IN" name="submit">
-            <p>No account? Register</p>
-            <p class="WrongInput">{{ error }}</p>
-        </form>
+    <form action="" method="post" id="LogInForm">
+        <input type="email" placeholder="Email" name="email">
+        <input type="password" placeholder="Password" name="password">
+        <input type="submit" value="SIGN IN" name="submit">
+        {#        <p>No account? Register</p>#}
+        <p class="WrongInput">{{ error }}</p>
+    </form>
+    <h2 id="FeaturesHeader"> Features</h2>
+    <div class="flexboxLogin">
+        <div class="hexagon">
+            <div class="hexagon-in1">
+                <div class="hexagon-in2">
+                </div>
+            </div>
+            <p class="features">Charts !</p>
+        </div>
+
+        <div class="hexagon">
+            <div class="hexagon-in1">
+                <div class="hexagon-in2">
+                </div>
+            </div>
+            <p class="features">Real Time Data !</p>
+        </div>
+
+        <div class="hexagon">
+            <div class="hexagon-in1">
+                <div class="hexagon-in2">
+                </div>
+            </div>
+            <p class="features">Secure Login !</p>
+        </div>
+
+    </div>
 {% endblock %}
 {% block nav %}
 {% endblock %}

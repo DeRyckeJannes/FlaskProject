@@ -1,18 +1,19 @@
 {% extends "Base.html" %}
+{% block nav_Weather %}active{% endblock %}
 {% block title %}
     Weather
 {% endblock %}
 {% block body %}
+
     <h1>Weather</h1>
     <div class="flexboxWeather">
-
         <div class="hexagon">
             <div class="hexagon-in1">
                 <div class="hexagon-in2">
                 </div>
             </div>
             <p class="pWeather">Temperatuur</p>
-            <p id="pTemperatuur">{{ SensorInfo[0] }}</p>
+            <p id="pTemperatuur">{{ SensorInfo[0] }} °C</p>
         </div>
 
 
@@ -32,7 +33,7 @@
                 </div>
             </div>
             <p class="pWeather">Windsnelheid</p>
-            <p id="pWindsnelheid">{{ SensorInfo[1] }}</p>
+            <p id="pWindsnelheid">{{ SensorInfo[1] }} km/h</p>
         </div>
 
         <div class="hexagon">
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <p class="pWeather">Luchtvochtigheid</p>
-            <p id="pLuchtvochtigheid">{{ SensorInfo[2] }}</p>
+            <p id="pLuchtvochtigheid">{{ SensorInfo[2] }}%</p>
         </div>
 
         <div class="hexagon">
@@ -59,5 +60,5 @@
     <figure>
         <img src="{{ url_for('static',filename="images/Picam.jpg") }}" alt="PyCamPicture" id="PyCamPicture">
     </figure>
-    <script src="../static/javascript/updateHTML.js"></script>
+    <script src="../static/javascript/updateTime.js"></script>
 {% endblock %}

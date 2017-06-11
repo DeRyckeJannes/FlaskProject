@@ -32,9 +32,8 @@ var2 = ((((temperatureValue >> 4) - (dig_T1) * ((temperatureValue >> 4) - (dig_T
 # print(var2)
 t_fine = (var1 | var2)
 T = (t_fine * 5 + 128) >> 8
-print(T)
-T = T / 100
-
+T = T / 100.0
+print("temperatuur:" + str(T))
 
 # ----------------------------------------------------------------------------------------------------------------------#
 dig_H1 = bus.read_byte_data(address, 0xA1)
@@ -87,3 +86,67 @@ if humidity > 100.0 :
 elif humidity < 0.0 :
     humidity = 0.0
 print("relative humidity: " + str(var_H))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+while True:
+    bus = smbus.SMBus(1)
+    address = 0x77
+
+    temperatureCompensationParameters = bus.read_i2c_block_data(address, 0x88, 6)
+    # compensatie parameters maar 1 keer inlezen data van sensor blijven inlezen
+    # unsigned integer value stored in two complement
+    # print(temperatureCompensationParameters)
+    # temperature
+    dig_T1 = temperatureCompensationParameters[1] << 8 | temperatureCompensationParameters[0]  # 0x88 & 0x09
+    dig_T2 = temperatureCompensationParameters[3] << 8 | temperatureCompensationParameters[2]  # 0x88 & 0x09
+    dig_T3 = temperatureCompensationParameters[5] << 8 | temperatureCompensationParameters[4]  # 0x88 & 0x09
+    # 2 complement uitrekenen
+    if dig_T2 > 32767:
+        dig_T2 -= 65536
+    if dig_T3 > 32767:
+        dig_T3 -= 65536
+
+    # temperatuur inlezen
+    temperatureXLSB = bus.read_byte_data(address, 0xFC)
+    temperatureLSB = bus.read_byte_data(address, 0xFB)
+    temperatureMSB = bus.read_byte_data(address, 0xFA)
+    temperatureValue = ((temperatureMSB << 16) | (temperatureLSB << 8) | (temperatureXLSB & 0xF0)) >> 4
+    # print("temperature value: "+str(temperatureValue))
+
+    # bereken temperatuur
+    var1 = (((temperatureValue >> 3) - (dig_T1 << 1)) * (dig_T2) >> 11)
+    var2 = ((((temperatureValue >> 4) - (dig_T1) * ((temperatureValue >> 4) - (dig_T1) >> 12))) * (dig_T3) >> 14)
+    # print(var1)
+    # print(var2)
+    t_fine = (var1 | var2)
+    T = (t_fine * 5 + 128) >> 8
+    T = T / 100.0
+    print("temperatuur:" + str(T))

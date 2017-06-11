@@ -1,27 +1,26 @@
-
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <link rel="stylesheet" href="/static/css/styleSheet.css">
     <meta charset="UTF-8">
     <title>WeatherStation -
         {% block title %}
         {% endblock %} </title>
+    {% block header %}
+    {% endblock %}
 </head>
 {#<body{% block background %} {% end block %}>#}
 <body {% block bodyID %} {% endblock %}>
 {% block nav %}
-<nav>
+    <nav>
         <ul>
-            <li><a href="{{ url_for('Home') }}">Home</a></li>
-            <li><a href="{{ url_for('TheWeather') }}">Weather</a></li>
-            <li><a href="{{ url_for('History') }}">History</a></li>
-            <li><a href="{{ url_for('Contact') }}">Contact</a></li>
+            <li class="{% block nav_Home %} {% endblock %}"><a href="{{ url_for('Home') }}">Home</a></li>
+            <li class="{% block nav_Weather %} {% endblock %}"><a href="{{ url_for('TheWeather') }}">Weather</a></li>
+            <li class="{% block nav_History %} {% endblock %}"><a href="{{ url_for('History') }}">History</a></li>
+            <li class="{% block nav_Contact %} {% endblock %}"><a href="{{ url_for('Contact') }}">Contact</a></li>
         </ul>
-</nav>
+    </nav>
 {% endblock %}
 {% block body %}
-
 {% endblock %}
 </body>
 </html>
