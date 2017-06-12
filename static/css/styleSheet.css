@@ -5,7 +5,7 @@ body {
 
 #HomeBody {
     font-family: Roboto, sans-serif;
-    background-image: url("../images/background1.jpg");
+    background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
 }
 
@@ -56,14 +56,13 @@ a {
 }
 
 #Home {
-    color: #0D5841;
+    color: white;
     text-transform: uppercase;
     font-size: 58px;
     text-align: center;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(255, 255, 255, 0.7);
     width: 550px;
 }
 
@@ -286,7 +285,7 @@ form input[type=submit]:hover {
     height: 100%;
     visibility: visible;
     transform: rotate(-60deg);
-    background: #EBF8BC;
+    background: white;
 }
 
 .hexagonHome .hexagon-in2 {
@@ -298,7 +297,7 @@ form input[type=submit]:hover {
 }
 
 .hexagon-in2:hover {
-    background: white;
+    background: cornsilk;
 }
 
 .flexboxCharts {
