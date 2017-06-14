@@ -2,6 +2,9 @@
 {% block nav_History %}active{% endblock %}
 {% block header %}
     <script src='../static/Chart.min.js'></script>
+    <script src="../static/javascript/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/sweetalert.css">
+    <meta http-equiv="refresh" content="5">
 {% endblock %}
 {% block body %}
 
@@ -18,16 +21,13 @@
         <canvas id="WindChart" class="charts"></canvas>
     </div>
 
-    <script>
-        var button = document.getElementById("Button1");
-        var button2= document.getElementById("Button2");
-        button.onclick = function () {
-            window.alert("Charts are being loaded please wait...");
-        };
-        button2.onclick=function(){
-            window.alert("Charts are being loaded please wait...");
-        };
-
+    <script type="text/javascript">
+        swal({
+            title: "Charts!",
+            text: "Charts are ready!",
+            type: "success",
+            confirmButtonText: "Cool"
+        });
 
         var ctx = document.getElementById('TempChart').getContext('2d');
         var TempChart = new Chart(ctx, {
@@ -35,7 +35,7 @@
             data: {
                 labels: [{% for item in labels %} "{{ item }}", {% endfor %}],
                 datasets: [{
-                    label: 'temperatuur',
+                    label: 'Temperature',
                     data: {{ Temp }},
                     backgroundColor: "rgba(255,255,255,0.6)"
                 }],

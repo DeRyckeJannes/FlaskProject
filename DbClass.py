@@ -2,7 +2,6 @@ import mysql.connector as connector
 class DbClass:
 
     def __init__(self):
-
         self.__dsn = {
             "host": "localhost",
             "user": "remote",
@@ -10,9 +9,7 @@ class DbClass:
             "db": "weerstation"
         }
 
-
-
-    def getLatestDataFromDatabase(self):
+    def getLatestDataFromDatabase(self): #get the latest data
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
@@ -22,7 +19,7 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def getDataFromDatabase(self):
+    def getDataFromDatabase(self): #get ALL the data
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
@@ -31,7 +28,7 @@ class DbClass:
         result = self.__cursor.fetchall()
         self.__cursor.close()
         return result
-    def getEmailsFromDatabase(self):
+    def getEmailsFromDatabase(self): # get email from users
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
@@ -41,7 +38,7 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def getPasswordsFromDatabase(self):
+    def getPasswordsFromDatabase(self): # get password from user
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
@@ -51,7 +48,7 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def getUsersFromDatabase(self):
+    def getUsersFromDatabase(self): # get id email and password from users
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
         sqlQuery = "SELECT ID,Email,Password FROM tblUsers"

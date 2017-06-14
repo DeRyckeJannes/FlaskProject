@@ -1,4 +1,9 @@
 {% extends "Base.html" %}
+{% block header %}
+    <script src="../static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="../static/javascript/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/sweetalert.css">
+{% endblock %}
 {% block nav_Contact %}active{% endblock %}
 {% block title %}
     Contact
@@ -9,9 +14,9 @@
         <form action="" method="post" id="ContactForm">
             <input type="text" placeholder="SUBJECT" name="Subject">
             <textarea name="Message" placeholder="MESSAGE"></textarea>
-            <input type="submit" value="SEND" name="submit">
-            <p class="WrongInput">{{ error }}</p>
-            <p class="SuccesFulInput">{{ succesful }}</p>
+            <input id="btn-submit" type="submit" value="SEND" name="submit">
+                        <p class="WrongInput">{{ error }}</p>
+                        <p class="SuccesFulInput">{{ succesful }}</p>
         </form>
     </div>
 {% endblock %}

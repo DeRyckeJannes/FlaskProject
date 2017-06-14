@@ -54,6 +54,7 @@ class History():
         currentMonth = today.strftime("%m")
         currentDay = today.strftime("%d")
         currentHour = today.strftime("%H")
+        currentWeekNumber=self.datetime.date(int(currentYear),int(currentMonth),int(currentDay)).isocalendar()[1]
         averageTemp = 0
         averageHum = 0
         averageWindSpeed = 0
@@ -68,8 +69,9 @@ class History():
             dbyear = DATETIME[0:4]
             d = self.datetime.date(int(dbyear), int(dbmonth), int(dbday))
             dbWeekDay = d.strftime('%A')
+            dbWeekNumber=self.datetime.date(int(dbyear),int(dbmonth),int(dbday)).isocalendar()[1]
             for i in range(0, len(self.__DailyTemp)):
-                if (dbWeekDay == self.__ChartDays[i] and dbmonth == currentMonth and dbyear == currentYear):  # we take the average of all of the measurements of that day
+                if (dbWeekDay == self.__ChartDays[i] and currentWeekNumber== dbWeekNumber and dbmonth == currentMonth and dbyear == currentYear):  # we take the average of all of the measurements of that day
                     self.__TempsThroughDay[i].append(values[0])
                     for temp in self.__TempsThroughDay[i]:
                         averageTemp += temp
@@ -90,71 +92,3 @@ class History():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    # today = datetime.datetime.today()
-    # currentYear = today.year
-    # currentYear=str(currentYear)
-    # currentWeekDay= today.weekday()
-    # currentWeekDay=str(currentWeekDay)
-    # currentMonth = today.strftime("%m")
-    # currentDay = today.strftime("%d")
-    # currentHour = today.strftime("%H")
-    # global DailyTemp
-    # global TempsThroughDay
-    # global HumThroughDay
-    # global WindSpeedsThroughDay
-    # global DailyHum
-    # global DailyWindSpeed
-    # global ChartDays
-    # global checkChartDaily
-    # averageTemp=0
-    # averageHum=0
-    # averageWindSpeed=0
-    # DB_Layer = DbClass()
-    # data = DB_Layer.getDataFromDatabase()
-    # for values in data:
-    #     DATETIME = values[4]
-    #     DATETIME = str(DATETIME)
-    #     dbhour = DATETIME[11:13]
-    #     dbday = DATETIME[8:10]
-    #     dbmonth = DATETIME[5:7]
-    #     dbyear = DATETIME[0:4]
-    #     d=datetime.date(int(dbyear),int(dbmonth),int(dbday))
-    #     dbWeekDay=d.strftime('%A')
-    #     for i in range(0, len(DailyTemp)):
-    #         if ( dbWeekDay== ChartDays[i] and checkChartDaily[i] == 0 and dbmonth == currentMonth and dbyear ==currentYear): # we take the average of all of the measurements of that day
-    #             TempsThroughDay[i].append(values[0])
-    #             for temp in TempsThroughDay[i]:
-    #                 averageTemp+=temp
-    #             averageTemp=averageTemp/len(TempsThroughDay[i])
-    #             DailyTemp[i]=averageTemp
-    #             print DailyTemp
-    #
-    #             HumThroughDay[i].append(values[2])
-    #             for hum in HumThroughDay[i]:
-    #                 averageHum += hum
-    #             averageHum = averageHum / len(HumThroughDay[i])
-    #             DailyHum[i] = averageHum
-    #             print DailyHum
-    #
-    #             WindSpeedsThroughDay[i].append(values[1])
-    #             for WindSpeeds in WindSpeedsThroughDay[i]:
-    #                 averageWindSpeed += WindSpeeds
-    #             averageWindSpeed = averageWindSpeed / len(WindSpeedsThroughDay[i])
-    #             DailyWindSpeed[i] = averageWindSpeed
-    #             print DailyWindSpeed
-    #             checkChartDaily[i] = 1
-    #         if currentHour == "23":
-    #             for i in range(0, len(checkChartDaily)):
-    #                 checkChartDaily[i] = 0

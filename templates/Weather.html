@@ -3,26 +3,27 @@
 {% block title %}
     Weather
 {% endblock %}
+{% block header %}
+    <meta http-equiv="refresh" content="5">
+{% endblock %}
 {% block body %}
 
     <h1>Weather</h1>
     <div class="flexboxWeather">
         <div class="hexagon">
             <div class="hexagon-in1">
-                <div class="hexagon-in2">
-                </div>
+                <div class="hexagon-in2"></div>
             </div>
-            <p class="pWeather">Temperatuur</p>
+            <p class="pWeather">Temperature</p>
             <p id="pTemperatuur">{{ SensorInfo[0] }} °C</p>
         </div>
-
 
         <div class="hexagon">
             <div class="hexagon-in1">
                 <div class="hexagon-in2">
                 </div>
             </div>
-            <p class="pWeather">Datum/tijd</p>
+            <p class="pWeather">Time</p>
             <p id="pTijd">{{ currentTime }}</p>
         </div>
 
@@ -32,7 +33,7 @@
 
                 </div>
             </div>
-            <p class="pWeather">Windsnelheid</p>
+            <p class="pWeather">Windspeed</p>
             <p id="pWindsnelheid">{{ SensorInfo[1] }} km/h</p>
         </div>
 
@@ -42,7 +43,7 @@
 
                 </div>
             </div>
-            <p class="pWeather">Luchtvochtigheid</p>
+            <p class="pWeather">Humidity</p>
             <p id="pLuchtvochtigheid">{{ SensorInfo[2] }}%</p>
         </div>
 
@@ -52,7 +53,7 @@
 
                 </div>
             </div>
-            <p class="pWeather">Neerslag</p>
+            <p class="pWeather">Rain?</p>
             <p id="pNeerslag">{{ SensorInfo[3] }}</p>
         </div>
     </div>

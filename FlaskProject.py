@@ -27,7 +27,7 @@ app = Flask(__name__)
 myLCD.ShowText("...")
 myLCD.ShowText("...")
 
-def checkSensors():
+def checkSensors(): # function that gets data from the sensors and places it in the database. We call this function each x seconds
     global myLCD
     print ("checking sensors")
     today = datetime.datetime.today()
@@ -46,7 +46,8 @@ def checkSensors():
     print ("humidity: " + str(values[2]))
     print ("RainDrop: " + str(raindrop))
 
-@app.route('/', methods=['POST', 'GET'])
+
+@app.route('/', methods=['POST', 'GET']) # get data from all the users, check if email and password match --> if they match return home else return login and error saying email and/or password are incorrect
 def LogIn():
     DB_Layer = DbClass()
     error = ""
@@ -71,11 +72,11 @@ def LogIn():
     if request.method == 'GET':
         return render_template("LogIn.html")
 
-@app.route('/Home')
+@app.route('/Home') #return home template
 def Home():
     return render_template("Home.html")
 
-@app.route('/Weather')
+@app.route('/Weather') #get t
 def TheWeather():
     DB_Layer = DbClass()
     SensorInfo = DB_Layer.getLatestDataFromDatabase()
@@ -102,7 +103,7 @@ def History():
 
 @app.route('/Contact', methods=['POST', 'GET'])
 def Contact():
-    error = ""
+    error = 0
     succesful = "We have recieved your question, we will contact you by mail."
     DB_Layer = DbClass()
     if request.method == 'POST':

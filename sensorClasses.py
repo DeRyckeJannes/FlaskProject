@@ -14,24 +14,18 @@ class sensors():
         self.__spi.open(0, 0)  # open spi port 0, device (CS) 0
         self.__counter = 0
 
-        # BME280 address, 0x77(118)
-        # Select control humidity register, 0xF2(242)
-        #		0x01(01)	Humidity Oversampling = 1
-        self.__bus.write_byte_data(self.__address, 0xF2,
-                                   0x01)  # Select Control measurement register, 0xF4(244)Pressure and Temperature Oversampling rate = 1 Normal mode
-        self.__bus.write_byte_data(self.__address, 0xF4,
-                                   0x27)  # Select Configuration register, 0xF5(245) Stand_by time = 1000 ms
+        self.__bus.write_byte_data(self.__address, 0xF2,0x01)#humidity control register set oversampling on 1
+        self.__bus.write_byte_data(self.__address, 0xF4,0x27)
         self.__bus.write_byte_data(self.__address, 0xF5, 0xA0)
 
-    def ReadCompensationParametersTemp(self):  # run once compensation parameters are always the same
+    def ReadCompensationParametersTemp(self):  # run once since  compensation parameters are always the same
         temperatureCompensationRegisters = self.__bus.read_i2c_block_data(self.__address, 0x88, 6)
-        # compensatie parameters maar 1 keer inlezen data van sensor blijven inlezen
         # unsigned integer value stored in two complement
         # temperature
         dig_T1 = temperatureCompensationRegisters[1] << 8 | temperatureCompensationRegisters[0]  # 0x88 & 0x09
         dig_T2 = temperatureCompensationRegisters[3] << 8 | temperatureCompensationRegisters[2]  # 0x88 & 0x09
         dig_T3 = temperatureCompensationRegisters[5] << 8 | temperatureCompensationRegisters[4]  # 0x88 & 0x09
-        # 2 complement uitrekenen
+        # 2 complement
         if dig_T2 > 32767:
             dig_T2 -= 65536
         if dig_T3 > 32767:
@@ -93,13 +87,13 @@ class sensors():
         humidity = round(humidity, 2)
         return humidity
 
-    def __ReadChannel(self, channel):
+    def __ReadChannel(self, channel): # read a channel from the MCP3008
         adc = self.__spi.xfer2([1, (8 + channel) << 4, 0])
         data = ((adc[1] & 3 << 8) | adc[2])  # in byte 1 en 2 zit resultaat
         return data
 
     def ReadWindspeed(self):
-        windspeed = self.__ReadChannel(0)
+        windspeed = self.__ReadChannel(0) # read mcp channel 0
         windspeed = (windspeed / 1023.0) * 3.3
         windspeed = windspeed - 0.45
         if (windspeed <= 0):
@@ -107,19 +101,10 @@ class sensors():
         windspeed = (((windspeed / 1.6) * 32))#*3.6 voor km/h
         return windspeed
 
-    def ReadRaindDrop(self):  # rain drop sensor can also be connected to 5v and MCP3008 for more values but we just want to know if it is raining or not.
+    def ReadRaindDrop(self):  # rain drop sensor can also be connected to 5v and MCP3008 for more values but we just want to know if it is raining or not. so now its connected to a GPIO pin.
         sensors.GPIO.setmode(sensors.GPIO.BCM)
         sensors.GPIO.setup(5, sensors.GPIO.IN)
         if sensors.GPIO.input(5) == 0:
             return ("Its Raining!")
         if sensors.GPIO.input(5) == 1:
             return ("Its not Raining!")
-
-#
-# mysensor=sensors()
-# compensationT=mysensor.ReadCompensationParametersTemp()
-# t_fine,T=mysensor.CalculateTemperature(compensationT)
-# compensationH=mysensor.ReadCompensationParametersHumidity()
-# while True:
-#     compensationH = mysensor.ReadCompensationParametersHumidity()
-#     print mysensor.CalculateHumidity(compensationH,t_fine)

@@ -13,6 +13,7 @@
 {% block nav %}
     <nav>
         <ul>
+            <li><img CLASS="navicon" src="../static/images/submarine.png"></li>
             <li class="{% block nav_Home %} {% endblock %}"><a href="{{ url_for('Home') }}">Home</a></li>
             <li class="{% block nav_Weather %} {% endblock %}"><a href="{{ url_for('TheWeather') }}">Weather</a></li>
             <li class="{% block nav_History %} {% endblock %}"><a href="{{ url_for('History') }}">History</a></li>

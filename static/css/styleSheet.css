@@ -56,6 +56,10 @@ a {
 }
 
 #Home {
+    background-image: url("../images/submarine.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 85px;
     color: white;
     text-transform: uppercase;
     font-size: 58px;
@@ -74,6 +78,7 @@ nav {
 }
 
 ul {
+    overflow:hidden;
     list-style-type: none;
     display: flex;
     justify-content: center;
@@ -291,7 +296,6 @@ form input[type=submit]:hover {
 .hexagonHome .hexagon-in2 {
     background: white;
 }
-
 .hexagonHome .hexagon-in2:hover {
     background: cornsilk;
 }
@@ -316,6 +320,18 @@ form input[type=submit]:hover {
     margin-bottom: 200px;
 }
 
-.active {
-    border-bottom: 3px solid #0D5841;
+.active a {
+    background-color: #0D5841;
+    color:white;
+}
+li :first-child{
+    float:left;
+}
+.navicon{
+    width: 75px;
+    float: left;
+
+}
+.icon{
+
 }

@@ -8,7 +8,7 @@
     {% set active_page = "Home" %}
     {% block nav %}
     {% endblock %}
-    <h1 id="Home">WeatherStation</h1>
+    <h1 id="Home">GreenSub</h1>
     <div class="flexboxHome">
         <a href="{{ url_for("TheWeather") }}">
             <div class="hexagon hexagonHome">
@@ -37,28 +37,7 @@
                 <p class="pHome">Contact</p>
             </div>
         </a>
-
-
-        <a href="{{ url_for("Contact") }}">
-            <div class="hexagon hexagonHome">
-                <div class="hexagon-in1">
-                    <div class="hexagon-in2">
-                    </div>
-                </div>
-            </div>
-        </a>
-
-
     </div>
-
-
-
-
-
-
-
-
-
 
 {% endblock %}
 
