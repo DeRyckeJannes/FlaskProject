@@ -19,13 +19,14 @@ myLCD.ShowText("hum: ")
 mySensors = sensors()
 humidityCompensationParameters = mySensors.ReadCompensationParametersHumidity()
 temperatureCompensationParameters = mySensors.ReadCompensationParametersTemp()
-# camera = PiCam()
+camera = PiCam()
 scheduler = BackgroundScheduler()
 scheduler.start()
 currentUser = []
 app = Flask(__name__)
 myLCD.ShowText("...")
 myLCD.ShowText("...")
+WeatherstationID=1
 
 def checkSensors(): # function that gets data from the sensors and places it in the database. We call this function each x seconds
     global myLCD
@@ -46,12 +47,11 @@ def checkSensors(): # function that gets data from the sensors and places it in 
     print ("humidity: " + str(values[2]))
     print ("RainDrop: " + str(raindrop))
 
-
 @app.route('/', methods=['POST', 'GET']) # get data from all the users, check if email and password match --> if they match return home else return login and error saying email and/or password are incorrect
 def LogIn():
     DB_Layer = DbClass()
     error = ""
-    global WeerstationID
+    global WeatherstationID
     global currentUser
     users = DB_Layer.getUsersFromDatabase()
     if request.method == 'POST':
@@ -64,7 +64,7 @@ def LogIn():
             DBpassword = userData[2]
             if DBemail == InputEmail:
                 if DBpassword == InputPassword:
-                    WeerstationID = DB_Layer.getWeerstationIDFromUser(userData[0])
+                    WeatherstationID = DB_Layer.getWeatherstationIDFromUser(userData[0])
                     return render_template("Home.html")
         else:
             error = "Email or password is incorrect."
@@ -76,7 +76,7 @@ def LogIn():
 def Home():
     return render_template("Home.html")
 
-@app.route('/Weather') #get t
+@app.route('/Weather')
 def TheWeather():
     DB_Layer = DbClass()
     SensorInfo = DB_Layer.getLatestDataFromDatabase()
@@ -98,9 +98,6 @@ def History():
     elif request.method == 'GET':
         return render_template("History.html")
 
-# @app.route('/HistoryDaily')
-# def HistoryDaily():
-
 @app.route('/Contact', methods=['POST', 'GET'])
 def Contact():
     error = 0
@@ -119,11 +116,11 @@ def Contact():
     if request.method == 'GET':
         return render_template("Contact.html")
 
-# scheduler.add_job(func=camera.checkForPicture, trigger=IntervalTrigger(minutes=1), id='CheckCamera',
-#                   name='check if camera has to take picture', replace_existing=True)
+scheduler.add_job(func=camera.checkForPicture, trigger=IntervalTrigger(minutes=1), id='CheckCamera',
+                  name='check if camera has to take picture', replace_existing=True)
 
-scheduler.add_job(func=checkSensors, trigger=IntervalTrigger(seconds=10), id='CheckSensors',
+scheduler.add_job(func=checkSensors, trigger=IntervalTrigger(minutes=1), id='CheckSensors',
                   name='Saving sensor values', replace_existing=True)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=False) #set debug on false or picamera will give an error and the project wont run.

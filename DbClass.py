@@ -13,7 +13,7 @@ class DbClass:
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
-        sqlQuery = "SELECT Temperatuur,Windsnelheid,Luchtvochtigheid,RainDrop FROM tblMetingen ORDER BY ID DESC LIMIT 1"
+        sqlQuery = "SELECT Temperature,Windspeed,Humidity,RainDrop FROM tblMeasurements ORDER BY ID DESC LIMIT 1"
         self.__cursor.execute(sqlQuery)
         result = self.__cursor.fetchall()
         self.__cursor.close()
@@ -23,7 +23,7 @@ class DbClass:
         # Query zonder parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
-        sqlQuery = "SELECT Temperatuur,Windsnelheid,Luchtvochtigheid,RainDrop,DateTime FROM tblMetingen"
+        sqlQuery = "SELECT Temperature,Windspeed,Humidity,RainDrop,DateTime FROM tblMeasurements"
         self.__cursor.execute(sqlQuery)
         result = self.__cursor.fetchall()
         self.__cursor.close()
@@ -57,10 +57,10 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def getWeerstationIDFromUser(self,UsersID):
+    def getWeatherstationIDFromUser(self,UsersID):
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
-        sqlQuery = "select tblWeerstations.ID from tblWeerstations join tblUsers on tblWeerstations.usersID = tblUsers.id where tblUsers.id='"+str(UsersID)+"' LIMIT 1"
+        sqlQuery = "select tblWeatherstations.ID from tblWeatherstations join tblUsers on tblWeatherstations.usersID = tblUsers.id where tblUsers.id='"+str(UsersID)+"' LIMIT 1"
         self.__cursor.execute(sqlQuery)
         result = self.__cursor.fetchone()
         self.__cursor.close()
@@ -81,7 +81,7 @@ class DbClass:
         # Query met parameters
         self.__connection = connector.connect(**self.__dsn)
         self.__cursor = self.__connection.cursor()
-        sqlQuery = "INSERT INTO tblMetingen (WeerstationID,Temperatuur,Windsnelheid,Luchtvochtigheid,RainDrop,DateTime) VALUES ('{param1}','{param2}','{param3}','{param4}','{param5}','{param6}')"
+        sqlQuery = "INSERT INTO tblMeasurements (WeerstationID,Temperature,Windspeed,Humidity,RainDrop,DateTime) VALUES ('{param1}','{param2}','{param3}','{param4}','{param5}','{param6}')"
         # Combineren van de query en parameter
         sqlCommand = sqlQuery.format(param1=WeerstationID, param2=list[0],param3=list[1],param4=list[2],param5=list[3], param6=moment)
         self.__cursor.execute(sqlCommand)

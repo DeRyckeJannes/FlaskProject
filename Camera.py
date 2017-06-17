@@ -21,6 +21,5 @@ class PiCam:
                 for i in range(0, len(self.__photoTaken)):
                     self.__photoTaken[i] = 0
 
-# foto openen in command line kan met gpicview XMING moet actief zijn.
-# klok oproepen en kijken of het tijd is voor een foto
-#mmal of picamera.exc picamerammalerror failed to enalbe connection out of resources ? --> enable camera in raspi-config
+#you can access your pictures in command line with gpicview, XMING needs to be installed on your pc
+#mmal of picamera.exc picamerammalerror failed to enalbe connection out of resources ? --> enable camera in raspi-config and make sure that debug=False or camera will  give error

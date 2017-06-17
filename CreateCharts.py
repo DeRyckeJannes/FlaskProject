@@ -1,4 +1,4 @@
-class History():
+class History(): # class that gets all data from database and returns list of average temp each hour or reach day. Afterwards we use those lists to create a chart.
     import datetime
     from DbClass import DbClass
     def __init__(self):
